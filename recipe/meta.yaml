@@ -1,5 +1,5 @@
 {% set name = "lrslib" %}
-{% set version = "70.a" %}
+{% set version = "71.a" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: http://cgm.cs.mcgill.ca/~avis/C/lrslib/archive/lrslib-0{{ version.replace(".", "") }}.tar.gz
-  sha256: d38cb8633e856398b461b35daa269d960c2c0e12b3df5725359dc3940b518e0c
+  sha256: 926636ea68de46625f141f6e025dce967cc7e68cf4bf4a597375c063f5c11673
 
 build:
-  number: 1
-  skip: True  # [win]
+  number: 0
+  skip: true  # [win]
 
 requirements:
   build:
@@ -36,7 +36,7 @@ about:
   license: GPL-2.0
   license_family: GPL
   license_file: COPYING
-  summary: 'lrslib is a self-contained ANSI C implementation of the reverse search algorithm for vertex enumeration/convex hull problems'
+  summary: lrslib is a self-contained ANSI C implementation of the reverse search algorithm for vertex enumeration/convex hull problems
   doc_url: http://cgm.cs.mcgill.ca/%7Eavis/C/lrslib/USERGUIDE.html
 
 extra:
