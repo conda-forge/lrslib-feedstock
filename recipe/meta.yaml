@@ -33,7 +33,7 @@ test:
 
 about:
   home: http://cgm.cs.mcgill.ca/~avis/C/lrs.html
-  license: GPL-2.0
+  license: GPL-2.0-or-later
   license_family: GPL
   license_file: COPYING
   summary: lrslib is a self-contained ANSI C implementation of the reverse search algorithm for vertex enumeration/convex hull problems
