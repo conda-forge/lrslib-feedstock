@@ -1,5 +1,5 @@
 {% set name = "lrslib" %}
-{% set version = "71.a" %}
+{% set version = "71.b" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: http://cgm.cs.mcgill.ca/~avis/C/lrslib/archive/lrslib-0{{ version.replace(".", "") }}.tar.gz
-  sha256: 926636ea68de46625f141f6e025dce967cc7e68cf4bf4a597375c063f5c11673
+  sha256: df22682cd742315fe04f866cfe4804d5950f7dc7f514d5b5f36f5b7f5aff9188
 
 build:
   number: 0
