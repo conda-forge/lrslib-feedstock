@@ -1,5 +1,6 @@
 {% set name = "lrslib" %}
 {% set version = "73.a" %}
+{% set posix = "m2-" if build_platform.startswith("win-") else '' %}
 
 package:
   name: {{ name|lower }}
@@ -11,15 +12,16 @@ source:
 
 build:
   number: 0
-  skip: true  # [win]
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ stdlib("c") }}
-    - coreutils
-    - sed
-    - make
+    - {{ compiler('c') }}  # [unix]
+    - {{ compiler("m2w64_c") }}  # [win]
+    - {{ stdlib("c") }}  # [unix]
+    - {{ stdlib("m2w64_c") }}  # [win]
+    - {{ posix }}coreutils
+    - {{ posix }}sed
+    - {{ posix }}make
   host:
     - gmp
 
@@ -27,9 +29,10 @@ test:
   requires:
     - curl
   commands:
-    - test -f $PREFIX/lib/liblrs${SHLIB_EXT}
-    - test -f $PREFIX/include/lrslib/lrslib.h
-    - curl -L -O http://cgm.cs.mcgill.ca/~avis/C/lrslib/archive/test_files/lrs/bv7.ine
+    - test -f $PREFIX/lib/liblrs${SHLIB_EXT}  # [unix]
+    - test -f $PREFIX/include/lrslib/lrslib.h  # [unix]
+    - if not exist %LIBRARY_PREFIX%\include\lrslib\lrslib.h exit 1  # [win]
+    - curl -L -O http://cgm.cs.mcgill.ca/~avis/C/lrslib/archive/test_files/lrs/bv7.ine  # [build_platform == target_platform]
     - redund bv7.ine  # [build_platform == target_platform]
 
 about:
