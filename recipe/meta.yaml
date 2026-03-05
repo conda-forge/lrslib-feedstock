@@ -30,7 +30,7 @@ test:
     - test -f $PREFIX/lib/liblrs${SHLIB_EXT}
     - test -f $PREFIX/include/lrslib/lrslib.h
     - curl -L -O http://cgm.cs.mcgill.ca/~avis/C/lrslib/archive/test_files/lrs/bv7.ine
-    - redund bv7.ine
+    - redund bv7.ine  # [build_platform == target_platform]
 
 about:
   home: http://cgm.cs.mcgill.ca/~avis/C/lrs.html
