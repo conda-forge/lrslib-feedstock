@@ -10,8 +10,7 @@ elif [[ "$target_platform" == osx-* ]]; then
   OPTIONS="SONAME=liblrs.0.dylib SHLIB=liblrs.0.0.0.dylib SHLINK=liblrs.dylib"
 fi
 export CC="${CC} ${CPPFLAGS} ${CFLAGS}"
-export LDFLAGS="${LDFLAGS}"
-make INCLUDEDIR=${PREFIX}/include LIBDIR=${PREFIX}/lib prefix=$PREFIX all-shared install -j${CPU_COUNT} $OPTIONS
+make LDFLAGS="${LDFLAGS}" INCLUDEDIR=${PREFIX}/include LIBDIR=${PREFIX}/lib prefix=$PREFIX all-shared install -j${CPU_COUNT} $OPTIONS
 if [[ "$target_platform" == "win-64" ]]; then
   cp ${PREFIX}/bin/lrs.exe ${PREFIX}/bin/redund.exe
 else
