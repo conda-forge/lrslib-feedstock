@@ -1,5 +1,5 @@
 {% set name = "lrslib" %}
-{% set version = "71.b" %}
+{% set version = "73.a" %}
 
 package:
   name: {{ name|lower }}
@@ -10,7 +10,7 @@ source:
   sha256: df22682cd742315fe04f866cfe4804d5950f7dc7f514d5b5f36f5b7f5aff9188
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win]
 
 requirements:
