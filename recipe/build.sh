@@ -5,6 +5,8 @@ if [[ "$target_platform" == "win-64" ]]; then
   # MinGW doesn't use soname; replace with --out-implib to produce import library
   sed -i "s/-Wl,-soname=/-Wl,--out-implib=/g" makefile
   OPTIONS="SONAME=liblrs.dll.a SHLIB=liblrs.dll SHLINK=liblrs.dll.a"
+  # Disable POSIX signal handling (SIGUSR1, sigprocmask, etc.) on Windows
+  export CPPFLAGS="${CPPFLAGS} -DSIGNALS"
 elif [[ "$target_platform" == osx-* ]]; then
   sed -i "s/-Wl,-soname=/-Wl,-install_name,/g" makefile
   OPTIONS="SONAME=liblrs.0.dylib SHLIB=liblrs.0.0.0.dylib SHLINK=liblrs.dylib"
