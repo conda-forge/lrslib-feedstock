@@ -17,4 +17,4 @@ docker_image:
 gmp:
 - '6'
 target_platform:
-- linux-64
+- linux-ppc64le

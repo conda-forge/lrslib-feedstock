@@ -1,5 +1,6 @@
 {% set name = "lrslib" %}
-{% set version = "71.b" %}
+{% set version = "73.a" %}
+{% set posix = "m2-" if build_platform.startswith("win-") else '' %}
 
 package:
   name: {{ name|lower }}
@@ -7,18 +8,20 @@ package:
 
 source:
   url: http://cgm.cs.mcgill.ca/~avis/C/lrslib/archive/lrslib-0{{ version.replace(".", "") }}.tar.gz
-  sha256: df22682cd742315fe04f866cfe4804d5950f7dc7f514d5b5f36f5b7f5aff9188
+  sha256: 7fb16ad5c2b7380ef8deaecbfaf53599eef074fd225012aa431b76ee0bded6a6
 
 build:
-  number: 1
-  skip: true  # [win]
+  number: 0
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - coreutils
-    - sed
-    - make
+    - {{ compiler('c') }}  # [unix]
+    - {{ compiler("m2w64_c") }}  # [win]
+    - {{ stdlib("c") }}  # [unix]
+    - {{ stdlib("m2w64_c") }}  # [win]
+    - {{ posix }}coreutils
+    - {{ posix }}sed
+    - {{ posix }}make
   host:
     - gmp
 
@@ -26,10 +29,11 @@ test:
   requires:
     - curl
   commands:
-    - test -f $PREFIX/lib/liblrs${SHLIB_EXT}
-    - test -f $PREFIX/include/lrslib/lrslib.h
-    - curl -L -O http://cgm.cs.mcgill.ca/~avis/C/lrslib/archive/test_files/lrs/bv7.ine
-    - redund bv7.ine
+    - test -f $PREFIX/lib/liblrs${SHLIB_EXT}  # [unix]
+    - test -f $PREFIX/include/lrslib/lrslib.h  # [unix]
+    - if not exist %LIBRARY_PREFIX%\include\lrslib\lrslib.h exit 1  # [win]
+    - curl -L -O http://cgm.cs.mcgill.ca/~avis/C/lrslib/archive/test_files/lrs/bv7.ine  # [build_platform == target_platform]
+    - redund bv7.ine  # [build_platform == target_platform]
 
 about:
   home: http://cgm.cs.mcgill.ca/~avis/C/lrs.html
